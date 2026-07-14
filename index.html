@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استثمارات عقارية استثنائية | شركة عقارات فاخرة</title>
+    
+    <!-- Fonts: Alexandria for headings, Tajawal for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons for thin, elegant icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: '#171717',
+                        'warm-white': '#F7F5F0',
+                        'stone-beige': '#D8CFC2',
+                        'dark-gray': '#4A4A48',
+                        'antique-gold': '#A88A57',
+                    },
+                    fontFamily: {
+                        heading: ['Alexandria', 'sans-serif'],
+                        body: ['Tajawal', 'sans-serif'],
+                    },
+                    spacing: {
+                        'section-y': '120px',
+                    },
+                    borderRadius: {
+                        'soft': '6px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F5F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D8CFC2;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A88A57;
+        }
+
+        /* Base Typography */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #F7F5F0;
+            color: #171717;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Alexandria', sans-serif;
+        }
+
+        /* Utilities */
+        .glass-nav {
+            background: rgba(247, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(216, 207, 194, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #A88A57, #c4a773);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Reveal Animations on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 500px; /* arbitrary max height */
+            opacity: 1;
+            padding-bottom: 1rem;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-button.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-antique-gold selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent py-4">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <i class="ph ph-buildings text-3xl text-antique-gold group-hover:text-charcoal transition-colors"></i>
+                <span class="font-heading font-bold text-xl tracking-wide nav-text text-white transition-colors">عقارات النخبة</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#hero" class="nav-link text-white/90 hover:text-antique-gold text-[17px] transition-colors">الرئيسية</a>
+                <a href="#properties" class="nav-link text-white/90 hover:text-antique-gold text-[17px] transition-colors">العقارات</a>
+                <a href="#services" class="nav-link text-white/90 hover:text-antique-gold text-[17px] transition-colors">خدماتنا</a>
+                <a href="#about" class="nav-link text-white/90 hover:text-antique-gold text-[17px] transition-colors">عن الشركة</a>
+                <a href="#reviews" class="nav-link text-white/90 hover:text-antique-gold text-[17px] transition-colors">آراء العملاء</a>
+            </nav>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden md:inline-flex items-center justify-center bg-antique-gold text-white font-heading font-medium px-6 py-3 rounded-soft hover:bg-charcoal transition-all duration-300 text-[16px]">
+                    احجز استشارتك
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden text-white nav-text focus:outline-none">
+                    <i class="ph ph-list text-3xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-charcoal z-40 transform translate-x-full transition-transform duration-300 flex flex-col pt-24 px-6 gap-6 lg:hidden">
+            <button id="close-menu-btn" class="absolute top-6 left-6 text-warm-white">
+                <i class="ph ph-x text-3xl"></i>
+            </button>
+            <a href="#hero" class="mobile-link text-warm-white text-2xl font-heading hover:text-antique-gold">الرئيسية</a>
+            <a href="#properties" class="mobile-link text-warm-white text-2xl font-heading hover:text-antique-gold">العقارات</a>
+            <a href="#services" class="mobile-link text-warm-white text-2xl font-heading hover:text-antique-gold">خدماتنا</a>
+            <a href="#about" class="mobile-link text-warm-white text-2xl font-heading hover:text-antique-gold">عن الشركة</a>
+            <a href="#reviews" class="mobile-link text-warm-white text-2xl font-heading hover:text-antique-gold">آراء العملاء</a>
+            <a href="#contact" class="mobile-link mt-8 inline-flex items-center justify-center bg-antique-gold text-white font-heading px-6 py-4 rounded-soft w-full text-xl text-center">
+                احجز استشارتك
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section id="hero" class="relative min-h-[90vh] flex items-center pt-20">
+        <!-- Background Image & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Using a high-quality luxury property image placeholder -->
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="فيلا فاخرة وقت الغروب" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-charcoal/60"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12 w-full text-center mt-12">
+            <h1 class="font-heading font-bold text-4xl md:text-6xl lg:text-[72px] text-warm-white leading-tight mb-6 reveal">
+                استثمارات عقارية استثنائية... <br>
+                <span class="gold-gradient-text">تبدأ من هنا</span>
+            </h1>
+            <p class="text-lg md:text-[20px] text-warm-white/90 max-w-3xl mx-auto leading-relaxed mb-10 reveal delay-100 font-light">
+                نساعدك على امتلاك عقارات مختارة بعناية في أفضل المواقع، مع استشارات احترافية وشفافية كاملة تساعدك على اتخاذ قرار استثماري واثق.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal delay-200">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-antique-gold text-white font-heading font-medium rounded-soft hover:bg-white hover:text-charcoal transition-all duration-300 text-[18px]">
+                    احجز استشارتك العقارية
+                </a>
+                <a href="#properties" class="w-full sm:w-auto px-8 py-4 border border-warm-white/30 text-warm-white font-heading font-medium rounded-soft hover:bg-warm-white/10 transition-all duration-300 text-[18px]">
+                    استعرض العقارات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Trust Signals -->
+    <section class="bg-stone-beige py-12 border-b border-charcoal/5 relative z-20">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-charcoal/10 text-center">
+                
+                <div class="reveal flex flex-col items-center pt-4 md:pt-0">
+                    <i class="ph ph-hourglass-high text-4xl text-antique-gold mb-3"></i>
+                    <span class="font-heading font-bold text-3xl text-charcoal mb-1 dir-ltr inline-block">+15</span>
+                    <span class="text-dark-gray text-lg">عامًا من الخبرة العقارية</span>
+                </div>
+                
+                <div class="reveal delay-100 flex flex-col items-center pt-8 md:pt-0">
+                    <i class="ph ph-handshake text-4xl text-antique-gold mb-3"></i>
+                    <span class="font-heading font-bold text-3xl text-charcoal mb-1 dir-ltr inline-block">+1,200</span>
+                    <span class="text-dark-gray text-lg">صفقة استثمارية ناجحة</span>
+                </div>
+                
+                <div class="reveal delay-200 flex flex-col items-center pt-8 md:pt-0">
+                    <i class="ph ph-users-three text-4xl text-antique-gold mb-3"></i>
+                    <span class="font-heading font-bold text-3xl text-charcoal mb-1">احترافية</span>
+                    <span class="text-dark-gray text-lg">فريق متخصص وإجراءات واضحة</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Selected Properties -->
+    <section id="properties" class="py-[120px] bg-warm-white">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal mb-4">عقارات مختارة بعناية</h2>
+                <p class="text-dark-gray text-[18px] leading-relaxed">
+                    مجموعة من الفرص السكنية والاستثمارية التي جرى اختيارها بناءً على الموقع والجودة والقيمة المستقبلية.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                
+                <!-- Property Card 1 -->
+                <div class="group cursor-pointer reveal">
+                    <div class="overflow-hidden rounded-soft mb-5 relative aspect-[4/3]">
+                        <div class="absolute top-4 right-4 z-10 bg-charcoal/80 backdrop-blur-sm text-warm-white px-3 py-1 rounded-soft text-sm font-medium">فيلا سكنية</div>
+                        <img src="https://images.unsplash.com/photo-1613490908571-9ce2249b49f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="فيلا الجاردنز" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-bold text-2xl text-charcoal mb-2 group-hover:text-antique-gold transition-colors">مجمع الجاردنز السكني</h3>
+                        <p class="text-dark-gray flex items-center gap-1 mb-4">
+                            <i class="ph ph-map-pin text-antique-gold"></i> التجمع الخامس، القاهرة
+                        </p>
+                        <div class="flex justify-between items-center border-t border-stone-beige pt-4 mb-5">
+                            <div class="flex items-center gap-2 text-charcoal">
+                                <i class="ph ph-bounding-box font-bold text-xl"></i>
+                                <span>450 م²</span>
+                            </div>
+                            <div class="font-heading font-semibold text-lg text-antique-gold">السعر عند الطلب</div>
+                        </div>
+                        <a href="#" class="block w-full text-center py-3 border border-charcoal text-charcoal rounded-soft font-heading hover:bg-charcoal hover:text-white transition-all duration-300">عرض التفاصيل</a>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="group cursor-pointer reveal delay-100">
+                    <div class="overflow-hidden rounded-soft mb-5 relative aspect-[4/3]">
+                        <div class="absolute top-4 right-4 z-10 bg-charcoal/80 backdrop-blur-sm text-warm-white px-3 py-1 rounded-soft text-sm font-medium">بنتهاوس</div>
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="بنتهاوس الساحل" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-bold text-2xl text-charcoal mb-2 group-hover:text-antique-gold transition-colors">إطلالة مارينا سكاي</h3>
+                        <p class="text-dark-gray flex items-center gap-1 mb-4">
+                            <i class="ph ph-map-pin text-antique-gold"></i> الساحل الشمالي، سيدي عبدالرحمن
+                        </p>
+                        <div class="flex justify-between items-center border-t border-stone-beige pt-4 mb-5">
+                            <div class="flex items-center gap-2 text-charcoal">
+                                <i class="ph ph-bounding-box font-bold text-xl"></i>
+                                <span>320 م²</span>
+                            </div>
+                            <div class="font-heading font-semibold text-lg text-antique-gold">السعر عند الطلب</div>
+                        </div>
+                        <a href="#" class="block w-full text-center py-3 border border-charcoal text-charcoal rounded-soft font-heading hover:bg-charcoal hover:text-white transition-all duration-300">عرض التفاصيل</a>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="group cursor-pointer reveal delay-200">
+                    <div class="overflow-hidden rounded-soft mb-5 relative aspect-[4/3]">
+                        <div class="absolute top-4 right-4 z-10 bg-charcoal/80 backdrop-blur-sm text-warm-white px-3 py-1 rounded-soft text-sm font-medium">مقر إداري</div>
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="مقر إداري" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-bold text-2xl text-charcoal mb-2 group-hover:text-antique-gold transition-colors">برج الأعمال المركزي</h3>
+                        <p class="text-dark-gray flex items-center gap-1 mb-4">
+                            <i class="ph ph-map-pin text-antique-gold"></i> العاصمة الإدارية الجديدة
+                        </p>
+                        <div class="flex justify-between items-center border-t border-stone-beige pt-4 mb-5">
+                            <div class="flex items-center gap-2 text-charcoal">
+                                <i class="ph ph-bounding-box font-bold text-xl"></i>
+                                <span>150 م²</span>
+                            </div>
+                            <div class="font-heading font-semibold text-lg text-antique-gold">السعر عند الطلب</div>
+                        </div>
+                        <a href="#" class="block w-full text-center py-3 border border-charcoal text-charcoal rounded-soft font-heading hover:bg-charcoal hover:text-white transition-all duration-300">عرض التفاصيل</a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <a href="#" class="inline-flex items-center gap-2 text-charcoal font-heading font-medium hover:text-antique-gold transition-colors border-b border-charcoal hover:border-antique-gold pb-1">
+                    استكشف جميع العقارات <i class="ph ph-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Services Section -->
+    <section id="services" class="py-[120px] bg-[#F1EFE9]">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal mb-4">خدمات عقارية متكاملة</h2>
+                <p class="text-dark-gray text-[18px] leading-relaxed">
+                    حلول متخصصة تساعدك على الشراء أو البيع أو الاستثمار بثقة، مع دعم واضح في كل مرحلة.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal border border-stone-beige/50">
+                    <i class="ph ph-house-line text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">شراء العقارات</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        نعثر لك على العقار المناسب لاحتياجاتك وميزانيتك، مع دعم كامل حتى إتمام عملية الشراء بأمان.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal delay-100 border border-stone-beige/50">
+                    <i class="ph ph-tag text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">بيع العقارات</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        نساعدك على تسويق عقارك والوصول إلى المشترين المناسبين لتحقيق أفضل قيمة ممكنة وفي وقت قياسي.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal delay-200 border border-stone-beige/50">
+                    <i class="ph ph-chart-line-up text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">الاستثمار العقاري</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        نرشدك إلى الفرص التي تتوافق مع أهدافك المالية ومستوى المخاطرة الذي يناسبك لضمان عائد مستدام.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal border border-stone-beige/50">
+                    <i class="ph ph-keys text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">إدارة العقارات</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        نتولى متابعة وتشغيل عقارك حتى تستفيد من استثمارك دون الانشغال بالتفاصيل اليومية المزعجة.
+                    </p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal delay-100 border border-stone-beige/50">
+                    <i class="ph ph-chats-circle text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">الاستشارات العقارية</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        تحصل على رأي مهني وشفاف يساعدك على مقارنة الخيارات المتاحة واتخاذ قرار مدروس بعناية.
+                    </p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-warm-white p-8 rounded-soft hover:shadow-md transition-shadow duration-300 reveal delay-200 border border-stone-beige/50">
+                    <i class="ph ph-scales text-4xl text-antique-gold mb-6 block"></i>
+                    <h3 class="font-heading font-bold text-xl text-charcoal mb-3">تقييم العقارات</h3>
+                    <p class="text-dark-gray leading-relaxed text-[17px]">
+                        نوفر تقييمًا موضوعيًا ودقيقًا لقيمة العقار وفق موقعه وحالته وظروف السوق الحالية.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Why Us -->
+    <section class="py-[120px] bg-warm-white overflow-hidden">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center gap-16">
+            
+            <div class="w-full lg:w-1/2 reveal">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal mb-8 leading-tight">
+                    قرارك العقاري يستحق <br>
+                    <span class="gold-gradient-text">وضوحًا أكبر</span>
+                </h2>
+                
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <i class="ph ph-check-circle text-2xl text-antique-gold mt-1"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl text-charcoal mb-1">عقارات مختارة وفق معايير واضحة</h4>
+                            <p class="text-dark-gray text-[17px]">نرفض العشوائية، ونعرض لك فقط ما نثق في جودته وقيمته الاستثمارية.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="ph ph-check-circle text-2xl text-antique-gold mt-1"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl text-charcoal mb-1">شفافية في المعلومات والتكاليف</h4>
+                            <p class="text-dark-gray text-[17px]">لا مفاجآت. نوضح لك كافة التفاصيل المالية والإجرائية منذ اللحظة الأولى.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="ph ph-check-circle text-2xl text-antique-gold mt-1"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl text-charcoal mb-1">استشارات تناسب أهداف العميل</h4>
+                            <p class="text-dark-gray text-[17px]">نستمع إليك أولاً، ثم نوجهك للخيار الذي يخدم مصلحتك أنت، وليس مصلحتنا.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="ph ph-check-circle text-2xl text-antique-gold mt-1"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl text-charcoal mb-1">متابعة مستمرة حتى اكتمال الإجراءات</h4>
+                            <p class="text-dark-gray text-[17px]">نقف بجانبك خطوة بخطوة حتى تستلم عقودك ومفاتيحك باطمئنان تام.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w-full lg:w-1/2 reveal delay-200">
+                <div class="relative rounded-soft overflow-hidden">
+                    <div class="absolute inset-0 bg-antique-gold/10 mix-blend-multiply z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="مستشار عقاري في اجتماع احترافي" class="w-full h-[500px] object-cover">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. Process -->
+    <section class="py-[120px] bg-stone-beige/40">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal mb-4">رحلة واضحة من الاستشارة إلى إتمام الصفقة</h2>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <!-- Connecting line desktop -->
+                <div class="hidden lg:block absolute top-[45px] left-0 right-0 h-[1px] bg-dark-gray/20 z-0"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-4 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="text-center reveal">
+                        <div class="w-24 h-24 mx-auto bg-warm-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-stone-beige">
+                            <span class="font-heading font-bold text-3xl text-antique-gold">01</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-[19px] text-charcoal mb-2">نفهم احتياجاتك وميزانيتك</h4>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center reveal delay-100">
+                        <div class="w-24 h-24 mx-auto bg-warm-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-stone-beige">
+                            <span class="font-heading font-bold text-3xl text-antique-gold">02</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-[19px] text-charcoal mb-2">نختار الفرص المناسبة</h4>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center reveal delay-200">
+                        <div class="w-24 h-24 mx-auto bg-warm-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-stone-beige">
+                            <span class="font-heading font-bold text-3xl text-antique-gold">03</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-[19px] text-charcoal mb-2">نقارن الخيارات ونوضح التفاصيل</h4>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="text-center reveal delay-300">
+                        <div class="w-24 h-24 mx-auto bg-warm-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-stone-beige">
+                            <span class="font-heading font-bold text-3xl text-antique-gold">04</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-[19px] text-charcoal mb-2">ندعمك خلال التفاوض والإجراءات</h4>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="text-center reveal delay-300">
+                        <div class="w-24 h-24 mx-auto bg-warm-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-stone-beige">
+                            <span class="font-heading font-bold text-3xl text-antique-gold">05</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-[19px] text-charcoal mb-2">نتابع معك بعد إتمام الصفقة</h4>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. Objections / FAQ -->
+    <section class="py-[120px] bg-warm-white">
+        <div class="max-w-[800px] mx-auto px-6 md:px-12">
+            
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal">أسئلة قد تدور في ذهنك</h2>
+            </div>
+
+            <div class="space-y-4 reveal delay-100">
+                
+                <!-- FAQ Item 1 -->
+                <div class="border border-stone-beige rounded-soft overflow-hidden bg-white">
+                    <button class="accordion-button w-full px-6 py-5 text-right flex justify-between items-center focus:outline-none">
+                        <span class="font-heading font-bold text-[18px] text-charcoal">هل السعر عادل أم أعلى من القيمة الحقيقية؟</span>
+                        <i class="ph ph-plus text-xl text-antique-gold accordion-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white">
+                        <p class="text-dark-gray text-[17px] leading-relaxed border-t border-stone-beige/50 pt-4">
+                            نقدم معلومات واضحة عن العقار وموقعه وأسعار السوق لمساعدتك على اتخاذ قرار مبني على حقائق وليس مجرد تكهنات.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-stone-beige rounded-soft overflow-hidden bg-white">
+                    <button class="accordion-button w-full px-6 py-5 text-right flex justify-between items-center focus:outline-none">
+                        <span class="font-heading font-bold text-[18px] text-charcoal">كيف أتأكد من سلامة الإجراءات؟</span>
+                        <i class="ph ph-plus text-xl text-antique-gold accordion-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white">
+                        <p class="text-dark-gray text-[17px] leading-relaxed border-t border-stone-beige/50 pt-4">
+                            نوضح المستندات والخطوات المطلوبة بالتفصيل، ونتابع العملية القانونية وفق الإجراءات والأنظمة المعمول بها لضمان سلامة موقفك.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-stone-beige rounded-soft overflow-hidden bg-white">
+                    <button class="accordion-button w-full px-6 py-5 text-right flex justify-between items-center focus:outline-none">
+                        <span class="font-heading font-bold text-[18px] text-charcoal">هل سأتعرض لضغط لاتخاذ قرار سريع؟</span>
+                        <i class="ph ph-plus text-xl text-antique-gold accordion-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white">
+                        <p class="text-dark-gray text-[17px] leading-relaxed border-t border-stone-beige/50 pt-4">
+                            مطلقاً. لا نطلب منك اتخاذ قرار قبل فهم جميع التفاصيل ومقارنة الخيارات المتاحة وأخذ الوقت الكافي للتفكير.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-stone-beige rounded-soft overflow-hidden bg-white">
+                    <button class="accordion-button w-full px-6 py-5 text-right flex justify-between items-center focus:outline-none">
+                        <span class="font-heading font-bold text-[18px] text-charcoal">ماذا لو لم أجد العقار المناسب؟</span>
+                        <i class="ph ph-plus text-xl text-antique-gold accordion-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white">
+                        <p class="text-dark-gray text-[17px] leading-relaxed border-t border-stone-beige/50 pt-4">
+                            لن نوصي بعقار لا يتوافق مع احتياجاتك. إذا لم تكن الخيارات الحالية مناسبة، سنواصل البحث المستمر عن خيارات أكثر ملاءمة لتطلعاتك.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-stone-beige rounded-soft overflow-hidden bg-white">
+                    <button class="accordion-button w-full px-6 py-5 text-right flex justify-between items-center focus:outline-none">
+                        <span class="font-heading font-bold text-[18px] text-charcoal">هل يستمر الدعم بعد إتمام الصفقة؟</span>
+                        <i class="ph ph-plus text-xl text-antique-gold accordion-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white">
+                        <p class="text-dark-gray text-[17px] leading-relaxed border-t border-stone-beige/50 pt-4">
+                            بالتأكيد. نبقى متاحين للإجابة عن الاستفسارات وتقديم الدعم المتعلق بالإجراءات اللاحقة، الإدارة، أو حتى إعادة البيع مستقبلاً.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Testimonial -->
+    <section id="reviews" class="py-[120px] bg-charcoal text-warm-white relative">
+        <i class="ph-fill ph-quotes text-[120px] text-white/5 absolute top-10 right-10 md:right-32 z-0"></i>
+        <div class="max-w-[1000px] mx-auto px-6 md:px-12 text-center relative z-10">
+            <h2 class="font-heading font-bold text-sm text-antique-gold tracking-widest mb-10 uppercase">تجارب مبنية على الثقة</h2>
+            
+            <div class="reveal">
+                <!-- Note to designer: Placeholder text to be replaced -->
+                <p class="text-2xl md:text-3xl font-light leading-relaxed mb-10 text-white/90">
+                    “كانت التجربة احترافية منذ الاستشارة الأولى وحتى إتمام عملية الشراء. حصلنا على شرح واضح لكل خطوة، وكانت المعلومات والتكاليف معروضة بشفافية تامة دون أي مفاجآت.”
+                </p>
+                
+                <div class="flex flex-col items-center justify-center gap-4">
+                    <div class="w-16 h-16 bg-antique-gold rounded-full flex items-center justify-center text-white font-heading text-xl">
+                        أ.م
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-lg text-white">أحمد محمد</h4>
+                        <span class="text-warm-white/60 text-sm">مستثمر عقاري (اسم افتراضي للاستبدال)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. About Us -->
+    <section id="about" class="py-[120px] bg-warm-white">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col-reverse lg:flex-row items-center gap-16">
+            
+            <div class="w-full lg:w-1/2 reveal">
+                <div class="relative rounded-soft overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="عمارة حديثة تعبر عن الشركة" class="w-full h-[500px] object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 reveal delay-200">
+                <h2 class="font-heading font-bold text-3xl md:text-[42px] text-charcoal mb-6 leading-tight">
+                    خبرة عقارية تضع <br>
+                    <span class="gold-gradient-text">مصلحة العميل أولًا</span>
+                </h2>
+                <p class="text-dark-gray text-[18px] leading-relaxed mb-8">
+                    نحن لا نبيع مجرد جدران، بل نقدم استشارات مبنية على دراية عميقة بالسوق. تجمع شركتنا بين المعرفة الدقيقة، الاختيار المدروس للعقارات، والالتزام المطلق بالشفافية لنضمن لك تجربة خالية من القلق واستثماراً آمناً لمستقبلك.
+                </p>
+                <a href="#" class="inline-flex items-center gap-2 text-charcoal font-heading font-bold hover:text-antique-gold transition-colors border-b-2 border-charcoal hover:border-antique-gold pb-1 text-lg">
+                    تعرّف على قصتنا <i class="ph ph-arrow-left"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 11. Final CTA -->
+    <section id="contact" class="relative py-[120px] bg-charcoal">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="تصميم داخلي فاخر" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 max-w-[800px] mx-auto px-6 text-center reveal">
+            <h2 class="font-heading font-bold text-3xl md:text-[48px] text-warm-white mb-6">
+                اتخذ أول خطوة نحو استثمارك العقاري بثقة
+            </h2>
+            <p class="text-[19px] text-warm-white/80 mb-10 leading-relaxed">
+                ابدأ باستشارة تساعدك على تقييم خياراتك وفهم الفرص المتاحة في السوق بوضوح قبل اتخاذ أي قرار.
+            </p>
+            <a href="#" class="inline-block px-10 py-5 bg-antique-gold text-white font-heading font-medium rounded-soft hover:bg-white hover:text-charcoal transition-all duration-300 text-xl mb-4">
+                احجز استشارتك العقارية
+            </a>
+            <p class="text-warm-white/50 text-sm">
+                استشارة أولية واضحة وشفافة، دون أي التزام بالشراء أو البيع.
+            </p>
+        </div>
+    </section>
+
+    <!-- 12. Footer -->
+    <footer class="bg-[#121212] pt-20 pb-10 border-t border-white/10 text-warm-white/80">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="flex items-center gap-2 mb-6 text-white">
+                        <i class="ph ph-buildings text-3xl text-antique-gold"></i>
+                        <span class="font-heading font-bold text-xl tracking-wide">عقارات النخبة</span>
+                    </a>
+                    <p class="text-[15px] leading-relaxed mb-6">
+                        شريكك الموثوق في رحلة البحث عن العقار المثالي أو الاستثمار الآمن، مع التزام تام بالشفافية والاحترافية.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:border-antique-gold text-white transition-all"><i class="ph ph-instagram-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:border-antique-gold text-white transition-all"><i class="ph ph-linkedin-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:border-antique-gold text-white transition-all"><i class="ph ph-x-logo text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6">روابط سريعة</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="hover:text-antique-gold transition-colors">الرئيسية</a></li>
+                        <li><a href="#properties" class="hover:text-antique-gold transition-colors">العقارات المتاحة</a></li>
+                        <li><a href="#services" class="hover:text-antique-gold transition-colors">خدماتنا العقارية</a></li>
+                        <li><a href="#about" class="hover:text-antique-gold transition-colors">قصة الشركة</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6">معلومات هامة</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-antique-gold transition-colors">الاستثمار العقاري</a></li>
+                        <li><a href="#" class="hover:text-antique-gold transition-colors">تقييم العقارات</a></li>
+                        <li><a href="#" class="hover:text-antique-gold transition-colors">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="hover:text-antique-gold transition-colors">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6">بيانات التواصل</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-phone text-antique-gold text-xl mt-1"></i>
+                            <span class="dir-ltr text-right inline-block w-full">+966 50 000 0000</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-envelope-simple text-antique-gold text-xl mt-1"></i>
+                            <span>contact@elite-realestate.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-clock text-antique-gold text-xl mt-1"></i>
+                            <span>الأحد - الخميس: 9 ص - 5 م</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/50">
+                <p>جميع الحقوق محفوظة &copy; 2026 شركة عقارات النخبة.</p>
+                <p class="mt-2 md:mt-0">تصميم وتطوير بواجهة فاخرة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/966500000000" target="_blank" class="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <i class="ph-fill ph-whatsapp-logo text-3xl"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            const navTexts = document.querySelectorAll('.nav-text, .nav-link');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass-nav');
+                    navbar.classList.remove('bg-transparent', 'py-4');
+                    navbar.classList.add('py-3');
+                    
+                    // Change text color from white to charcoal on scroll
+                    navTexts.forEach(el => {
+                        el.classList.remove('text-white', 'text-white/90');
+                        el.classList.add('text-charcoal');
+                    });
+                    document.getElementById('mobile-menu-btn').classList.remove('text-white');
+                    document.getElementById('mobile-menu-btn').classList.add('text-charcoal');
+
+                } else {
+                    navbar.classList.remove('glass-nav', 'py-3');
+                    navbar.classList.add('bg-transparent', 'py-4');
+                    
+                    // Revert text color to white at top
+                    navTexts.forEach(el => {
+                        el.classList.add('text-white/90');
+                        if(el.tagName === 'SPAN') el.classList.add('text-white'); // For logo
+                        el.classList.remove('text-charcoal');
+                    });
+                    document.getElementById('mobile-menu-btn').classList.add('text-white');
+                    document.getElementById('mobile-menu-btn').classList.remove('text-charcoal');
+                }
+            });
+
+            // 2. Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function openMenu() {
+                mobileMenu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            function closeMenu() {
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            }
+
+            mobileBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+            // 3. Scroll Reveal Animation using IntersectionObserver
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+
+            // 4. Accordion Logic for FAQ
+            const accordions = document.querySelectorAll('.accordion-button');
+
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    // Close all other accordions
+                    accordions.forEach(otherAcc => {
+                        if (otherAcc !== this && otherAcc.classList.contains('active')) {
+                            otherAcc.classList.remove('active');
+                            otherAcc.nextElementSibling.classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current accordion
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    content.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
